@@ -1,4 +1,4 @@
-# -*- coding: utf-8 -*-
+# -*- tfoding: utf-8 -*-
 """
 Created on Sat Oct 26 20:07:07 2019
 
@@ -18,7 +18,7 @@ def readData():
     fileName = "D:\\UTD\\SEM 3\\NLP\\Project\\data\\data\\train-set.txt"
     file = open(fileName, encoding="utf8")
     text = file.readline()
-    text = file.read()
+    text = file.read() #test
     #loop to extract a set of two sentences
     for sentence in text.split('\n'):
         #creating two separate lists of the sentences
