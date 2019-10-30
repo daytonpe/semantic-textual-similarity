@@ -18,7 +18,7 @@ def readData():
     fileName = "D:\\UTD\\SEM 3\\NLP\\Project\\data\\data\\train-set.txt"
     file = open(fileName, encoding="utf8")
     text = file.readline()
-    text = file.read() #test
+    text = file.read() 
     #loop to extract a set of two sentences
     for sentence in text.split('\n'):
         #creating two separate lists of the sentences
