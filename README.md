@@ -7,3 +7,7 @@ The lemmatizer looks like it's doing a few weird things. For example in line 1 s
 ```
 
 It seems that hoped, interested, bidder should be changed?
+
+##
+
+https://www.geeksforgeeks.org/get-synonymsantonyms-nltk-wordnet-python/

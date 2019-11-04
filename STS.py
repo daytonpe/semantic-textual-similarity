@@ -96,21 +96,44 @@ def preprocess():
 
     # dependency parsing
     print("\nDependency parsing: ")
-    dependency_parser = CoreNLPDependencyParser(url=core_nlp_url)
-    parse, = dependency_parser.raw_parse(first_sentence[0])
-    print(parse.to_conll(4))
+    # dependency_parser = CoreNLPDependencyParser(url=core_nlp_url)
+    # parse, = dependency_parser.raw_parse(first_sentence[0])
+    # print(parse.to_conll(4))
 
     # syntactic parsing
     print("\nFull syntactic parse tree: ")
-    syntactic_parser = CoreNLPParser(url=core_nlp_url)
-    next(syntactic_parser.raw_parse(first_sentence[0])).pretty_print()
-    # hypernyms
+    # syntactic_parser = CoreNLPParser(url=core_nlp_url)
+    # next(syntactic_parser.raw_parse(first_sentence[0])).pretty_print()
 
-    # hyponyms
+    # WORDNET connections. Should only be made for Nouns, Verbs,
 
-    # meronyms
+    print("\n WORDNET: ")
+    for w, pos in zip(first_sentence_tokens[0], first_sentence_tags[0]):
+        synonyms = []
+        hypernyms = []
+        # print('\t', w, ss, ss[0].hypernyms())
+        print('\n', pos[0], pos[1])
 
-    # holonyms
+        for syn in wn.synsets(w):
+            # Synonyms
+            for l in syn.lemmas():
+                if l.name() not in synonyms:
+                    synonyms.append(l.name())
+
+            # Hypernyms
+            for hpr in syn.hypernyms():
+                for l in hpr.lemmas():
+                    if l.name() not in hypernyms:
+                        hypernyms.append(l.name())
+
+        print('Synonyms: ', synonyms)
+        print('Hypernyms: ', hypernyms)
+
+        # hyponyms
+
+        # meronyms
+
+        # holonyms
 
 
 if __name__ == '__main__':
