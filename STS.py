@@ -105,8 +105,6 @@ def preprocess():
     # syntactic_parser = CoreNLPParser(url=core_nlp_url)
     # next(syntactic_parser.raw_parse(first_sentence[0])).pretty_print()
 
-    # WORDNET connections. Should only be made for Nouns, Verbs,
-
     print("\n WORDNET: ")
     for w, pos in zip(first_sentence_tokens[0], first_sentence_tags[0]):
         synonyms = []
