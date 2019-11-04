@@ -111,7 +111,11 @@ def preprocess():
     for w, pos in zip(first_sentence_tokens[0], first_sentence_tags[0]):
         synonyms = []
         hypernyms = []
-        # print('\t', w, ss, ss[0].hypernyms())
+        hyponyms = []
+        substance_meronyms = []
+        part_meronyms = []
+        holonyms = []
+
         print('\n', pos[0], pos[1])
 
         for syn in wn.synsets(w):
@@ -126,14 +130,36 @@ def preprocess():
                     if l.name() not in hypernyms:
                         hypernyms.append(l.name())
 
+            # Hyponyms
+            for hpo in syn.hyponyms():
+                for l in hpo.lemmas():
+                    if l.name() not in hyponyms:
+                        hyponyms.append(l.name())
+
+            # Substance Meronyms
+            for mrn in syn.substance_meronyms():
+                for l in mrn.lemmas():
+                    if l.name() not in substance_meronyms:
+                        substance_meronyms.append(l.name())
+
+            # Part Meronyms
+            for mrn in syn.part_meronyms():
+                for l in mrn.lemmas():
+                    if l.name() not in part_meronyms:
+                        part_meronyms.append(l.name())
+
+            # Holonyms
+            for hol in syn.member_holonyms():
+                for l in hol.lemmas():
+                    if l.name() not in holonyms:
+                        holonyms.append(l.name())
+
         print('Synonyms: ', synonyms)
         print('Hypernyms: ', hypernyms)
-
-        # hyponyms
-
-        # meronyms
-
-        # holonyms
+        print('Hyponyms: ', hyponyms)
+        print('Meronyms (substance): ', substance_meronyms)
+        print('Meronyms (part): ', part_meronyms)
+        print('Holonyms:', holonyms)
 
 
 if __name__ == '__main__':
