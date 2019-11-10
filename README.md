@@ -1,3 +1,9 @@
+# Semantic Textual Similarity
+
+## Features
+
+- Cosine Similarity -- bag of words style feature using TF-IDF
+
 ## Notes from Pat's 11/3 Work Session
 
 The lemmatizer looks like it's doing a few weird things. For example in line 1 sentence 1, it gives the following:

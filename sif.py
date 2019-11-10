@@ -10,9 +10,8 @@ from sklearn.metrics.pairwise import cosine_similarity
 from collections import Counter
 import math
 
+
 # same readData from STS.py
-
-
 def readData():
 
     first_sentence = []
@@ -95,25 +94,6 @@ def frequency_distribution():
     return freq_dist
 
 
-def run_tfid(sentence1, sentence2, true_score):
-
-    # print('sentence 1:', sentence1)
-    # print('sentence 2:', sentence2)
-    # print('score', true_score)
-    tfidf1 = TfidfVectorizer(
-        min_df=1, stop_words="english").fit_transform([sentence1, sentence2])
-    pairwise_similarity1 = tfidf1 * tfidf1.T
-    # print('pairwise_similarity1\n', pairwise_similarity1)
-
-    tfid_similarity = (pairwise_similarity1.toarray()[0][1]*5)
-
-    # print('TFID similarity: ', tfid_similarity)
-    # this should be the cosine similarity if i did it right
-    # https://stackoverflow.com/questions/8897593/how-to-compute-the-similarity-between-two-text-documents
-    # it's bag of words tho so it's pretty inaccurate.
-    return tfid_similarity
-
-
 first_sentence, second_sentence, score = readData()
 
 corpus = first_sentence+second_sentence
@@ -145,31 +125,3 @@ def run_sif(sentence1, sentence2, true_score):
         # print(X.shape)
 
         # run_tfid(first_sentence[0], second_sentence[0], score[0])
-
-
-def test():
-    error = 0
-    correct = 0
-    lines = len(first_sentence)
-    for i in range(0, lines):
-        true_score = int(score[i])
-        tfid_score = run_tfid(first_sentence[i], second_sentence[i], score[i])
-
-        # calculate the percentage of correct guesses
-        tfid_score_rounded = round(tfid_score)
-        if tfid_score == true_score:
-            correct += 1
-
-        # print(true_score, tfid_score, tfid_score_rounded,
-        #       true_score == tfid_score_rounded)
-        # calculate the unrounded error
-        line_error = abs(true_score - tfid_score)
-        error += line_error
-    print('average error: ', error / lines)
-    print('accuracy     : ', correct / lines)
-
-
-# run_sif(first_sentence[0], second_sentence[0], score[0])
-# test()
-
-run_tfid(first_sentence[0], second_sentence[0], 2)
