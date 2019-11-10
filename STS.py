@@ -96,14 +96,14 @@ def preprocess():
 
     # dependency parsing
     print("\nDependency parsing: ")
-    # dependency_parser = CoreNLPDependencyParser(url=core_nlp_url)
-    # parse, = dependency_parser.raw_parse(first_sentence[0])
-    # print(parse.to_conll(4))
+    dependency_parser = CoreNLPDependencyParser(url=core_nlp_url)
+    parse, = dependency_parser.raw_parse(first_sentence[0])
+    print(parse.to_conll(4))
 
     # syntactic parsing
     print("\nFull syntactic parse tree: ")
-    # syntactic_parser = CoreNLPParser(url=core_nlp_url)
-    # next(syntactic_parser.raw_parse(first_sentence[0])).pretty_print()
+    syntactic_parser = CoreNLPParser(url=core_nlp_url)
+    next(syntactic_parser.raw_parse(first_sentence[0])).pretty_print()
 
     print("\n WORDNET: ")
     for w, pos in zip(first_sentence_tokens[0], first_sentence_tags[0]):

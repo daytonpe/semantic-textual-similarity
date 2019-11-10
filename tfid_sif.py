@@ -166,7 +166,10 @@ def test():
         line_error = abs(true_score - tfid_score)
         error += line_error
     print('average error: ', error / lines)
-    print('percent error: ', correct / lines)
+    print('accuracy     : ', correct / lines)
 
 
-run_sif(first_sentence[0], second_sentence[0], score[0])
+# run_sif(first_sentence[0], second_sentence[0], score[0])
+# test()
+
+run_tfid(first_sentence[0], second_sentence[0], 2)
