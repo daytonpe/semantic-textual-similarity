@@ -1,4 +1,6 @@
 from sklearn.feature_extraction.text import TfidfVectorizer
+from sklearn.feature_extraction.text import CountVectorizer
+from sklearn.metrics.pairwise import cosine_similarity
 import numpy as np
 import nltk
 from nltk.stem import WordNetLemmatizer
@@ -6,12 +8,12 @@ from nltk.parse.corenlp import CoreNLPDependencyParser
 from nltk.parse.corenlp import CoreNLPParser
 from nltk.corpus import wordnet as wn
 from nltk.probability import FreqDist
-from sklearn.metrics.pairwise import cosine_similarity
 from collections import Counter
 import math
 
-
 # same readData from STS.py
+
+
 def readData():
 
     first_sentence = []
@@ -95,26 +97,21 @@ def frequency_distribution():
 
 
 first_sentence, second_sentence, score = readData()
-
-corpus = first_sentence+second_sentence
-
-vect = TfidfVectorizer(min_df=1, stop_words="english")
-tfidf = vect.fit_transform(corpus)
-pairwise_similarity = tfidf * tfidf.T
-
-arr = pairwise_similarity.toarray()
-np.fill_diagonal(arr, np.nan)
-
-
 first_sentence_tokens, second_sentence_tokens = preprocess()
+corpus = first_sentence+second_sentence
 freq_dist = frequency_distribution()
 
 
-def run_sif(sentence1, sentence2, true_score):
-    a = .001
+def run_sif(sentence1, sentence2, a=.001):
+    tfidf_vector = TfidfVectorizer(stop_words="english")
+    tfidf_matrix = tfidf_vector.fit_transform([sentence1, sentence2])
+    print('tfidf_matrix', tfidf_matrix)
+    print(tfidf_vector.get_feature_names())
+    print(tfidf_vector.get_params())
+
     for word in sentence1:
         w = a / (a + freq_dist[word])
-        print(w)
+        # print(w)
         # print(vect.get_feature_names())
         # print(corpus[:10])
 
@@ -125,3 +122,11 @@ def run_sif(sentence1, sentence2, true_score):
         # print(X.shape)
 
         # run_tfid(first_sentence[0], second_sentence[0], score[0])
+
+
+# run_sif('I like some apples', 'he loves the apples')
+corpus = ['I like some apples', 'he loves the red apples that are red']
+vectorizer = CountVectorizer(stop_words="english")
+X = vectorizer.fit_transform(corpus)
+print(vectorizer.get_feature_names())
+print(X.toarray())
