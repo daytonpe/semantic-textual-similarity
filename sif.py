@@ -125,8 +125,26 @@ def run_sif(sentence1, sentence2, a=.001):
 
 
 # run_sif('I like some apples', 'he loves the apples')
-corpus = ['I like some apples', 'he loves the red apples that are red']
+corpus = ['I like some apples', 'I like the pears']
 vectorizer = CountVectorizer(stop_words="english")
 X = vectorizer.fit_transform(corpus)
 print(vectorizer.get_feature_names())
-print(X.toarray())
+# print(X.toarray())
+
+
+X_arr = X.toarray()
+a = .001
+sif_matrix = []
+for i in range(0, len(X_arr)):
+    sif_arr = []
+    for j in range(0, len(X_arr[i])):
+        word = vectorizer.get_feature_names()[j]
+        w = a / (a + freq_dist[word])
+        v = X_arr[i][j]
+        sif_arr.append(v*w)
+    sif_matrix.append(sif_arr)
+print(sif_matrix)
+sif_cos_sim_matrix = cosine_similarity(sif_matrix, sif_matrix)
+print(sif_cos_sim_matrix)
+sif_cos_sim = sif_cos_sim_matrix[0][1]
+print(sif_cos_sim)
