@@ -4,6 +4,10 @@
 
 ### Shruti Agrawal and Pat Dayton
 
+## To Run
+
+Note that Stanford CoreNLP needs to be running in order to run the syntactic parsing aspects of the demo.
+
 ## Description of the Problem Statement
 
 Our task was to design and implement a model for determining the textual similarity between two sentences or chunks of text on a 1 to 5 scale. A higher score means that the two sentences are more similar. A lower score means they are less similar. Some examples from the training data are seen here:
